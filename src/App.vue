@@ -1,6 +1,8 @@
 <script setup>
 //reactividad
 import {ref,computed} from 'vue'
+import BlogPost from './components/BlogPost.vue';
+import buttonCounter from './components/ButtonCounter.vue'
 
   const name = "Vue dinamico";
   const color = "color: blue";
@@ -52,6 +54,18 @@ import {ref,computed} from 'vue'
       }
     }
   )
+  //Aqui comiensa codigo para sesion de componentes
+  const posts = ref([
+    { title: 'Post 1', id: 1, body: 'Descripcion 1'},
+    { title: 'Post 2', id: 2, body: 'Descripcion 2'},
+    { title: 'Post 3', id: 3, body: 'Descripcion 3'},
+    { title: 'Post 4', id: 4},
+  ]);
+
+  const fav = ref("");
+  const cambiarfav = (title) => {
+    fav.value=title;
+  };
 </script>
 
 <template>
@@ -109,6 +123,17 @@ import {ref,computed} from 'vue'
     <!--las clases pueden ser dinamicas-->
     <h1 :class="counter > 0 ? 'positivo' : 'negativo'"> {{ counter }}</h1>
     <h1 :class="classcount"> {{ counter }}</h1>
+    <!--Parte de Componentes-->
+    <h1>APP</h1>
+  <h2>Mi post Favorito: {{fav}}</h2>
+  <buttonCounter/>
+  <!--<BlogPost title="Post 1" :id="1"/>mandar un parametro-->
+  <BlogPost v-for="post in posts" 
+  :key="post.id" 
+  :title="post.title" 
+  :id="post.id" 
+  :body="post.body"
+  @evento="cambiarfav"></BlogPost>
   </body>
   </html>
 </template>
