@@ -1,6 +1,7 @@
 <script setup>
 //reactividad
 import {ref,computed} from 'vue'
+import { useCounterStore } from './store/counter.js'; //PINA
 
   const name = "Vue dinamico";
   const color = "color: blue";
@@ -52,6 +53,8 @@ import {ref,computed} from 'vue'
       }
     }
   )
+  //pina
+  const useCounter = useCounterStore()
 </script>
 
 <template>
@@ -109,6 +112,10 @@ import {ref,computed} from 'vue'
     <!--las clases pueden ser dinamicas-->
     <h1 :class="counter > 0 ? 'positivo' : 'negativo'"> {{ counter }}</h1>
     <h1 :class="classcount"> {{ counter }}</h1>
+    <!--PINA-->
+    <h1>Counter: {{ useCounter.count }}</h1>
+    <h1>Double: {{ useCounter.double }}</h1>
+    <button @click="useCounter.increment">incrementar</button>
   </body>
   </html>
 </template>
