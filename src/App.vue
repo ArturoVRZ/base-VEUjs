@@ -1,6 +1,7 @@
 <script setup>
 //reactividad
 import {ref,computed} from 'vue'
+import { useCounterStore } from './store/counter.js'; //PINA
 import BlogPost from './components/BlogPost.vue';
 import buttonCounter from './components/ButtonCounter.vue'
 
@@ -54,6 +55,8 @@ import buttonCounter from './components/ButtonCounter.vue'
       }
     }
   )
+  //pina
+  const useCounter = useCounterStore()
   //Aqui comiensa codigo para sesion de componentes
   const posts = ref([
     { title: 'Post 1', id: 1, body: 'Descripcion 1'},
@@ -123,6 +126,10 @@ import buttonCounter from './components/ButtonCounter.vue'
     <!--las clases pueden ser dinamicas-->
     <h1 :class="counter > 0 ? 'positivo' : 'negativo'"> {{ counter }}</h1>
     <h1 :class="classcount"> {{ counter }}</h1>
+    <!--PINA-->
+    <h1>Counter: {{ useCounter.count }}</h1>
+    <h1>Double: {{ useCounter.double }}</h1>
+    <button @click="useCounter.increment">incrementar</button>
     <!--Parte de Componentes-->
     <h1>APP</h1>
   <h2>Mi post Favorito: {{fav}}</h2>
